@@ -3,17 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:id="@+id/root_ProfileFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BottomNavigationThings.Profile.ProfileFragment">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        app:cardElevation="20dp"
-        app:cardCornerRadius="100dp">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/DodgerBlue"
+        app:title="Profile"
+        app:titleTextColor="@color/White"
+        />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
@@ -21,9 +22,10 @@
             android:layout_height="160dp"
             android:src="@drawable/logo"
             app:civ_border_width="2dp"
+            android:layout_margin="20dp"
+            android:layout_gravity="center"
             app:civ_border_color="#FF000000"/>
 
-    </androidx.cardview.widget.CardView>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -37,7 +39,7 @@
             <TextView
                 android:id="@+id/fullname"
                 style="@style/title"
-                android:text="Avinash Kumar"
+                android:text="First Step Ltd."
                 android:layout_marginBottom="4dp"
                 android:layout_gravity="center"/>
 
@@ -45,7 +47,7 @@
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="avi@stanbuzz.com"
+                android:text="aravind4532@gmail.com"
                 android:layout_gravity="center" />
 
             <LinearLayout
@@ -83,6 +85,7 @@
                     android:background="?android:attr/listDivider" />
 
                 <LinearLayout
+                    android:id="@+id/contactDeveloper"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -119,12 +122,14 @@
                     android:padding="16dp">
 
                     <ImageView
+                        android:id="@+id/SignOutImage"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="8dp"
                         android:src="@drawable/ic_logout" />
 
                     <TextView
+                        android:id="@+id/SignOutText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"

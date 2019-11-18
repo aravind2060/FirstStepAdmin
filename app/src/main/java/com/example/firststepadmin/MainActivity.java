@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpBottomNavigation();
+        replaceFragment(UploadNewProductFragmentInstance,FIRST_FRAGMENT_UPLOAD_NEW_PRODUCT);
     }
 
     private void setUpBottomNavigation() {

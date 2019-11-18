@@ -11,9 +11,6 @@ import android.view.ViewGroup;
 
 import com.example.firststepadmin.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CustomOrdersFragment extends Fragment {
 
 

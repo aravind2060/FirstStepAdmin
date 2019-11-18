@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.firststepadmin.Common.D_CurrentUser;
+import com.example.firststepadmin.Common.SharedPreferenceClass;
 import com.example.firststepadmin.MainActivity;
 import com.example.firststepadmin.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,11 +40,27 @@ public class A_SignIn extends AppCompatActivity implements View.OnClickListener 
     Button SignIn;
     boolean isAdmin=false;
     boolean isUser=false;
+    FirebaseAuth firebaseAuth;
+    String Uid;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (FirebaseAuth.getInstance().getCurrentUser()!=null)
+        {
+          SharedPreferenceClass.getDataFromSharedPreference(getApplicationContext());
+          new AsyncTaskToFetchCurrentUserData().execute();
+          startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_a__sign_in);
         findViewByIds();
+         firebaseAuth=FirebaseAuth.getInstance();
+
     }
 
     private void findViewByIds()
@@ -65,13 +85,21 @@ public class A_SignIn extends AppCompatActivity implements View.OnClickListener 
         if (checkUserNameOffline() && checkPasswordOffline())
         {
             if (checkUserNamePassWordInFireBaseAuthentication()) {
-                if (checkWhetherAdminOrNotInFireBaseDataBase()) {
+
+                Log.e("A_Signin","authentication is ok");
+
+                if (checkWhetherAdminOrNotInFireBaseDataBase())
+                {
                     Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
+                    Log.e("A_Signin","Database is ok");
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 } else {
                     Toast.makeText(this, "Not Admin", Toast.LENGTH_SHORT).show();
+                    Log.e("A_Signin","database is not ok");
                 }
             }
+            else
+                Log.e("A_Signin","authentication is not  ok");
         }
     }
 
@@ -101,22 +129,13 @@ public class A_SignIn extends AppCompatActivity implements View.OnClickListener 
 
     private boolean checkUserNamePassWordInFireBaseAuthentication()
     {
-        final FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
         firebaseAuth.signInWithEmailAndPassword(UserName.getEditableText().toString(),PassWord.getEditableText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful())
                 {
-                    if (firebaseAuth.getCurrentUser().isEmailVerified())
-                    {
-                      isUser=true;
-                    }
-                    else
-                    {
-                        Toast.makeText(getApplicationContext(),"Email Not verified please Verify Your Email",Toast.LENGTH_LONG).show();
-                        Log.i("A_SIGIN","Email Not verified");
-                        isUser=false;
-                    }
+                   Uid=firebaseAuth.getCurrentUser().getUid();
+                   isUser=true;
                 }
                 else
                 {
@@ -142,6 +161,7 @@ public class A_SignIn extends AppCompatActivity implements View.OnClickListener 
                             Toast.makeText(getApplicationContext(),"Login Via GoogleSignIN",Toast.LENGTH_LONG).show();
                         }
                     }
+                    isUser=false;
                 }
             }
         });
@@ -151,7 +171,7 @@ public class A_SignIn extends AppCompatActivity implements View.OnClickListener 
     private boolean checkWhetherAdminOrNotInFireBaseDataBase() {
 
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("Admin");
-        databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(Uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists())
@@ -162,12 +182,48 @@ public class A_SignIn extends AppCompatActivity implements View.OnClickListener 
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.e("A_Signin","Error : "+databaseError.getMessage());
             }
         });
+
         return isAdmin;
     }
 
 
+    class AsyncTaskToFetchCurrentUserData extends AsyncTask<Void,Void,Void>
+    {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Admin").child(firebaseAuth.getCurrentUser().getUid());
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists())
+                    {
+                       String email=dataSnapshot.child("Email").getValue(String.class);
+                       String name=dataSnapshot.child("Name").getValue(String.class);
+                       String profileImage=dataSnapshot.child("ProfileImage").getValue(String.class);
+                       setCurrentData(email,name,profileImage);
+                    }
+                    else
+                        Log.e("A_SignIn","Unable to get user Data");
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            return null;
+        }
+    }
+
+    private void setCurrentData(String email,String name,String profileImage)
+    {
+        D_CurrentUser.setEmail(email);
+        D_CurrentUser.setName(name);
+        D_CurrentUser.setProfileImage(profileImage);
+        SharedPreferenceClass.setDataIntoSharedPreference(getApplicationContext());
+    }
 
 }
