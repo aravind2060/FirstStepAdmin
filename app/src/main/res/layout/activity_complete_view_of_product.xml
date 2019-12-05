@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout_CompleteProduct"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".BottomNavigationThings.Profile.CompleteViewOfProduct">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/Toolbar_complete_view_Of_Product"
+        app:title="Product"
+        app:titleTextColor="@color/White"
+        android:background="@color/DodgerBlue"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        />
+    <ImageView
+        android:id="@+id/ProductImage_CompleteViewOfProduct"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:src="@drawable/ic_support"
+        android:scaleType="fitXY"
+        />
+    <ScrollView
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="4dp"
+        android:background="@drawable/rounded_top_card">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="32dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/Upladed_Date_PastOrder"
+                    style="@style/title"
+                    android:text="1-12-2019"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_gravity="center"/>
+                <LinearLayout
+                    android:id="@+id/ProductName_CompleteViewOfPurchasedProduct_Layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_name" />
+
+                    <TextView
+                        android:id="@+id/ProductName_CompleteViewOfProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:text="Nike"
+                        android:textColor="#444"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+                <LinearLayout
+                    android:id="@+id/ProductPrice_CompleteViewOfPurchasedProduct_Layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_coin" />
+
+                    <TextView
+                        android:id="@+id/ProductCategoryByPrice_CompleteViewProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:text="Rs.400"
+                        android:textColor="#444"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+                <LinearLayout
+                    android:id="@+id/ProductDescription_CompleteViewOfProduct_Layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/SignOutImage"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_description" />
+
+                    <TextView
+                        android:id="@+id/ProductDescription_CompleteViewOfProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:text="First Best Ever shoe"
+                        android:maxLines="3"
+                        android:textColor="#444"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+                <LinearLayout
+                    android:id="@+id/ProductCategoryByGender_CompleteViewOfPurchasedProduct_Layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_gender" />
+
+                    <TextView
+                        android:id="@+id/ProductCategoryByGender_CompleteViewOfProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:text="MenFootWear"
+                        android:textColor="#444"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+                <LinearLayout
+                    android:id="@+id/ProductCategoryByMaterial_CompleteViewOfPurchasedProduct_Layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_category" />
+                    <TextView
+                        android:id="@+id/ProductCategoryByMaterial_CompleteViewProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:text="Formal"
+                        android:textColor="#444"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
