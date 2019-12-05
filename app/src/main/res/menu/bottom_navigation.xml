@@ -7,16 +7,16 @@
         android:icon="@drawable/ic_high_heels"
         android:title="Upload"
         />
-
     <item
-        android:id="@+id/navigation_wishList"
-        android:icon="@drawable/ic_wishlist"
-        android:title="WishList" />
-    <item
-        android:id="@+id/navigation_custom"
+        android:id="@+id/navigation_inventory"
         android:icon="@drawable/ic_inventory"
         android:title="Inventory"
         />
+    <item
+        android:id="@+id/navigation_custom"
+        android:icon="@drawable/ic_wishlist"
+        android:title="Custom D" />
+
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_users"

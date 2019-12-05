@@ -13,10 +13,16 @@
         android:id="@+id/LoginLogo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"/>
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/LoginLogo"
+        android:translationZ="4dp"
+        android:background="@drawable/rounded_top_card"
+        android:padding="19dp"
+        >
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/sign_in_txt_layout_1"
-        android:layout_below="@id/LoginLogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:errorEnabled="true"
@@ -60,5 +66,5 @@
         android:id="@+id/log_btn"
         android:layout_below="@id/sign_in_txt_layout_2"
         />
-
+    </RelativeLayout>
 </RelativeLayout>

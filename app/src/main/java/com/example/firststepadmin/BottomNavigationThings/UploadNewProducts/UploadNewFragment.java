@@ -43,6 +43,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -51,6 +52,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -226,31 +229,12 @@ public class UploadNewFragment extends Fragment implements View.OnClickListener 
     }
 
 
-    private void getImageFromCamera()
-  {
-      if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)
-      {
-         requestPermissions(new String[]{Manifest.permission.CAMERA},REQUEST_CODE_FOR_CAMERA);
-      }
-      else
-      {
-          Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-          startActivityForResult(intent, REQUEST_CODE_FOR_CAMERA);
-      }
-  }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode==2) {
-            if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getImageFromCamera();
-            } else {
-                //todo snackbar
-                requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_FOR_CAMERA);
-            }
-        }
-        else if (requestCode==1)
+         if (requestCode==1)
         {
            if (permissions.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)
            {
@@ -267,14 +251,11 @@ public class UploadNewFragment extends Fragment implements View.OnClickListener 
     private void setImage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Choose from one among this..");
-        builder.setItems(new CharSequence[]{"Camera","Gallery"}, new DialogInterface.OnClickListener() {
+        builder.setItems(new CharSequence[]{"Gallery"}, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0:
-                        getImageFromCamera();
-                        break;
-                    case 1:
                         getImageFromGallery();
                         break;
                 }
@@ -377,6 +358,11 @@ public class UploadNewFragment extends Fragment implements View.OnClickListener 
                        if (task.isSuccessful()) {
                            //todo snackbar
                            Toast.makeText(getContext(), "Product Added", Toast.LENGTH_SHORT).show();
+                           String da;
+                           Date date=new Date();
+                           SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yyyy");
+                           da=simpleDateFormat.format(date);
+                           storeMetadata(new D_MetadataOfUploadingProducts(getUniqueKeyFromDatabase(),D_ProductCategoryByGender,D_ProductCategory,da));
                        }   else {
                        }       //todo snackbar
                    }
@@ -391,16 +377,24 @@ public class UploadNewFragment extends Fragment implements View.OnClickListener 
             Glide.with(getContext()).load(Imageuri).into(UploadedImage);
             setUploadDataFromGallery();
         }
-        else if (requestCode==REQUEST_CODE_FOR_CAMERA ) {
-            if (resultCode == RESULT_OK) {
+        else if (requestCode==REQUEST_CODE_FOR_CAMERA )
+        {
+            if (resultCode == RESULT_OK)
+            {
                 Log.e("UploadNewFragment","got image from camera");
-                bitmap = (Bitmap) data.getExtras().get("Data");
-                if (bitmap != null)
-                    Log.e("UploadNewFragment", "bitmap true");
+                if (data!=null) {
+                    Log.e("UploadNewFragment","DAta is not null");
+                    Bundle bundle=data.getExtras();
+                     bitmap=(Bitmap) bundle.get("Data");
+                    if (bitmap != null)
+                        Log.e("UploadNewFragment", "bitmap true");
+                    else
+                        Log.e("UploadNewFragment", "bitmap false");
+                    Glide.with(getContext()).load(bitmap).into(UploadedImage);
+                    setUploadFromCamera();
+                }
                 else
-                    Log.e("UploadNewFragment", "bitmap false");
-                Glide.with(getContext()).load(bitmap).into(UploadedImage);
-                setUploadFromCamera();
+                    Log.e("UploadNewFragment","DAta is null");
             }
             else
                 Log.e("UploadNewFragment","Unable to get image");
@@ -482,4 +476,17 @@ public class UploadNewFragment extends Fragment implements View.OnClickListener 
        alertDialog.show();
    }
 
+   private void storeMetadata(D_MetadataOfUploadingProducts metadataOfUploadingProducts)
+   {
+      DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Admin").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("PastUploadedOrders");
+      databaseReference.child(getUniqueKeyFromDatabase()).setValue(metadataOfUploadingProducts).addOnCompleteListener(new OnCompleteListener<Void>() {
+          @Override
+          public void onComplete(@NonNull Task<Void> task) {
+              if (task.isSuccessful())
+                  Toast.makeText(getContext(), "Metadata Uploaded SuccessFully", Toast.LENGTH_SHORT).show();
+              else
+                  Toast.makeText(getContext(), "Unable to update metadata", Toast.LENGTH_SHORT).show();
+          }
+      });
+   }
 }

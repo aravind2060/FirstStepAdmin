@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".BottomNavigationThings.Profile.A_HelpCustomersWithOrderId">
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/Toolbar_CustomerSupportWithOrderId"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:background="@color/DodgerBlue"
+      app:navigationIcon="@drawable/ic_arrow_back"
+      app:titleTextColor="@color/White"
+      app:title="Support Customers OrderId"
+      />
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchview_in_support_orderid"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:queryHint="TypePhoneNumber Or OrderId "
+        />
+      <LinearLayout
+          android:id="@+id/Layout_For_OrderId"
+          android:layout_width="350dp"
+          android:layout_height="350dp"
+          android:orientation="vertical"
+          android:visibility="invisible"
+          >
+        <ImageView
+            android:id="@+id/ProductImage_Support_CustomerId"
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:src="@drawable/ic_coin"
+            />
+        <TextView
+            android:id="@+id/ProductTitle_Support_CustomerId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="bsjbvkjsb"
+            android:textAlignment="center"
+          />
+        <TextView
+            android:id="@+id/ProductPrice_Support_CustomerId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="#444"
+            android:text="1200"
+            />
+      </LinearLayout>
+</LinearLayout>

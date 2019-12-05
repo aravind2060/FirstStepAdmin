@@ -8,21 +8,21 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.firststepadmin.BottomNavigationThings.CustomShoeOrders.CustomOrdersFragment;
+import com.example.firststepadmin.BottomNavigationThings.Inventory.PurchasedListFragment;
 import com.example.firststepadmin.BottomNavigationThings.Profile.ProfileFragment;
 import com.example.firststepadmin.BottomNavigationThings.UploadNewProducts.UploadNewFragment;
-import com.example.firststepadmin.BottomNavigationThings.UserWishList.UserWishListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
 
     private static final String FIRST_FRAGMENT_UPLOAD_NEW_PRODUCT ="UploadNewProduct" ;
-    private static final String SECOND_FRAGMENT_USER_WISH="UserWish";
+    private static final String SECOND_FRAGMENT_INVENTORY="INVENTORY";
     private static final String THIRD_FRAGMENT_CUSTOM_SHOE="Custom Shoe";
     private static final String FOURTH_FRAGMENT_PROFILE="Profile";
 
     private Fragment UploadNewProductFragmentInstance=new UploadNewFragment();
-    private Fragment UserWishFragmentInstance=new UserWishListFragment();
+    private Fragment InventoryListInstance=new PurchasedListFragment();
     private Fragment CustomOrdersFragmentInstance=new CustomOrdersFragment();
     private Fragment ProfileFragmentInstance=new ProfileFragment();
 
@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_Upload_icon:
                     replaceFragment(UploadNewProductFragmentInstance,FIRST_FRAGMENT_UPLOAD_NEW_PRODUCT);
                     return true;
-                case R.id.navigation_wishList:
-                    replaceFragment(UserWishFragmentInstance,SECOND_FRAGMENT_USER_WISH);
+                case R.id.navigation_inventory:
+                    replaceFragment(InventoryListInstance,SECOND_FRAGMENT_INVENTORY);
                     return true;
                 case R.id.navigation_custom:
                     replaceFragment(CustomOrdersFragmentInstance,THIRD_FRAGMENT_CUSTOM_SHOE);

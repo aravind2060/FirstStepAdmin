@@ -55,8 +55,8 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="32dp"
                 android:orientation="vertical">
-
                 <LinearLayout
+                    android:id="@+id/Help_Customers_With_OrderId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -65,7 +65,35 @@
 
                     <ImageView
                         android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_support" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:text="Help Customers with OrderId"
+                        android:textColor="#444"
+                        android:textSize="20sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
+                <LinearLayout
+                    android:id="@+id/View_Past_Orders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="25dp"
                         android:layout_marginStart="8dp"
                         android:src="@drawable/ic_order" />
 
@@ -94,7 +122,7 @@
 
                     <ImageView
                         android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_marginStart="8dp"
                         android:src="@drawable/ic_contact" />
 
@@ -124,7 +152,7 @@
                     <ImageView
                         android:id="@+id/SignOutImage"
                         android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_marginStart="8dp"
                         android:src="@drawable/ic_logout" />
 

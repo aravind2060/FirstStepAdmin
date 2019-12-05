@@ -36,7 +36,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     CircleImageView circleImageView;
     TextView Email,Name;
-    View SignOut,ContactDeveloper,rootlinearlayout;
+    View SignOut,ContactDeveloper,rootlinearlayout,helpCustomersWithOrderId,pastorders;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +57,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
       ContactDeveloper=view.findViewById(R.id.contactDeveloper);
       ContactDeveloper.setOnClickListener(this);
       SignOut.setOnClickListener(this);
+      helpCustomersWithOrderId=view.findViewById(R.id.Help_Customers_With_OrderId);
+      helpCustomersWithOrderId.setOnClickListener(this);
+      pastorders=view.findViewById(R.id.View_Past_Orders);
+      pastorders.setOnClickListener(this);
     }
     private void setData()
     {
@@ -76,6 +80,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         {
            setContactDeveloper();
         }
+        else if (v.getId()==R.id.Help_Customers_With_OrderId)
+        {
+            startActivity(new Intent(getContext(),A_HelpCustomersWithOrderId.class));
+        }
+        else if (v.getId()==R.id.View_Past_Orders)
+            startActivity(new Intent(getContext(),A_PastUploadedProducts.class));
     }
 
     private void setContactDeveloper() {
@@ -125,4 +135,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
+
+  private void UploadToFirebase
+
+
 }

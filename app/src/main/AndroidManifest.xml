@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.firststepadmin">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.camera.autofocus"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.camera.flash"
-        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_step"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_step"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".BottomNavigationThings.Profile.CompleteViewOfProduct"></activity>
+        <activity android:name=".BottomNavigationThings.Profile.A_PastUploadedProducts" />
+        <activity android:name=".BottomNavigationThings.Profile.A_HelpCustomersWithOrderId" />
+        <activity android:name=".BottomNavigationThings.Inventory.A_CompleteViewOfPurchasedProduct" />
         <activity android:name=".Login.A_SignIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,8 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
